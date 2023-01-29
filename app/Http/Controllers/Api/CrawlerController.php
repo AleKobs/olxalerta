@@ -39,7 +39,6 @@ class CrawlerController extends Controller
             } else {
                 $this->saveAdvertise($ad, $url->id);
             }
-
         }
         $url->last_visited_at = time();
         $url->save();
@@ -63,7 +62,7 @@ class CrawlerController extends Controller
         return [
             'payload' => ['url' => $url, 'ads' => $ads]
         ];
-        return $ads;
+        return ['sucess' => true];
     }
 
     private function saveAdvertise($ad, $url_id, $alert_date = null) {
