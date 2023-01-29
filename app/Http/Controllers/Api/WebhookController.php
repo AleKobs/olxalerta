@@ -29,7 +29,7 @@ class WebhookController extends Controller
         $adsToNotify = [];
         foreach($ads as $ad) {
             $ad->alert_date = date('Y-m-d H:i:s', time());
-            //$ad->save();
+            $ad->save();
             $adsToNotify[] = $ad;
         }
 
