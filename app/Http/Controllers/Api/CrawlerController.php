@@ -29,10 +29,26 @@ class CrawlerController extends Controller
 
         $ads = $this->crawSpecficUrl($url->url);
         foreach($ads as $ad) {
-            $this->saveAdvertise($ad, 1);
+            $this->saveAdvertise($ad, $url->id);
         }
         $url->last_visited_at = time();
         $url->save();
+
+        /**
+         *
+         * tabela: urls
+         * - id
+         * - url
+         * - expires_at: now() + 60 dias
+         * - user_id
+         *
+         *
+         * tabela users:
+         * - id
+         * - nome
+         *
+         *
+         */
 
         return [
             'payload' => ['url' => $url, 'ads' => $ads]

@@ -24,5 +24,6 @@ Route::get('/crawler/start', [CrawlerController::class,'start']);
 
 
 Route::get('/url', [WebhookController::class,'index']);
+Route::get('/message', [WebhookController::class,'message']);
 Route::post('/url/add', [WebhookController::class,'store']);
 Route::delete('/url/remove', [WebhookController::class,'remove']);
