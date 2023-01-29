@@ -24,7 +24,8 @@ class CrawlerController extends Controller
     }
 
     public function start() {
-        $url = Url::orderBy('last_visited_at', 'asc')->first();
+
+        $url = Url::where('last_visited_at', '<', strtotime('-5 minutes'))->orderBy('last_visited_at', 'asc')->first();
         if (!$url) { return 'Nenhuma URL cadastrada'; }
 
         $ads = $this->crawSpecficUrl($url->url);
