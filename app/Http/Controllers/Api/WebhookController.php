@@ -47,7 +47,7 @@ class WebhookController extends Controller
 		])
         ->post('https://alerta-preco.facilita.dev/api/webhook', $postData)->collect();
 
-        return ['postData: ' => $postData, 'response' =>$response];
+        return ['response' =>$response];
 
 
     }
