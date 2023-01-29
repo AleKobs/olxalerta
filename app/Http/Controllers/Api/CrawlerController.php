@@ -28,8 +28,17 @@ class CrawlerController extends Controller
         if (!$url) { return 'Nenhuma URL cadastrada'; }
 
         $ads = $this->crawSpecficUrl($url->url);
+
+
+
+
         foreach($ads as $ad) {
-            $this->saveAdvertise($ad, $url->id);
+            if ($url->last_visited_at == 0) {
+                $this->saveAdvertise($ad, $url->id, true);
+            } else {
+                $this->saveAdvertise($ad, $url->id);
+            }
+
         }
         $url->last_visited_at = time();
         $url->save();
@@ -56,12 +65,15 @@ class CrawlerController extends Controller
         return $ads;
     }
 
-    private function saveAdvertise($ad, $url_id) {
+    private function saveAdvertise($ad, $url_id, $alert_date = null) {
 
         if (Advertise::where('url_id', $url_id)->where('url', $ad['url'])->count() > 0) {
             return false;
         }
         $ad['url_id'] = $url_id;
+        if ($alert_date) {
+            $ad['alert_date'] = date('Y-m-d H:i:s', time());
+        }
         return Advertise::create($ad);
     }
 
