@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('url');
             $table->string('price_str')->nullable();
-            $table->float('price')->nullable();
+            $table->decimal('price', 10,2)->nullable()->unsigned();
             $table->datetime('published_at')->nullable();
             $table->string('image')->nullable();
             $table->datetime('alert_date')->nullable();
