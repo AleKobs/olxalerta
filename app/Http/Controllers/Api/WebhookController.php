@@ -45,7 +45,7 @@ class WebhookController extends Controller
         ->withHeaders([
 			'Content-Type' => 'application/json',
 		])
-        ->post('https://alerta-preco.facilita.dev/api/webhook', $postData)->collect();
+        ->post('https://alertapreco.com/api/webhook', $postData)->collect();
 
         return ['response' =>$response, 'alerts_enviados' => $ads->count()];
 
